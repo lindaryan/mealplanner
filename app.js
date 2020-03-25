@@ -4,8 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexController = require('./controllers/index');
+
+// add mongoose for db connection
+var mongoose = require('mongoose')
+
 var usersController = require('./controllers/users');
+
+// add reference to meals controller
+var mealsController = require('./controllers/meals')
 
 var app = express();
 
@@ -19,8 +25,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexController);
+// db connection
+var globals = require('./config/globals')
+
+mongoose.connect(globals.db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(
+    (res) => {
+      console.log('Connected to MongoDB')
+    }
+).catch(() => {
+  console.log('Connection to MongoDB failed')
+})
+
 app.use('/users', usersController);
+
+
+var indexController = require('./controllers/index');
+app.use('/', indexController);
+
+// map any urls starting with /meals to be handled by the meals controller
+app.use('/meals', mealsController)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

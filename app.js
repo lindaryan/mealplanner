@@ -12,7 +12,7 @@ var usersController = require('./controllers/users');
 
 // add reference to meals and mealTypes controllers
 var mealsController = require('./controllers/meals')
-var mealTypesController = require('./controllers/mealtypes')
+var mealTypesController = require('./controllers/mealTypes')
 
 var app = express();
 

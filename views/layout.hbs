@@ -7,54 +7,87 @@
   </head>
   <body>
   <!-- Header Nav -->
-  <section class="header">
-      <h1 id="headerLogo"><a href="/" id="headerLogo">MEAL PLANNER</a></h1>
-      <h3>something interesting goes here...and maybe a logo</h3>
-      <div class="navbar">
-          <a class="tab" href="/about">About</a>
-          <a class="tab" href="/meals">Meals</a>
-          <a class="tab" href="/calendar">Calendar</a>
-          <a class="tab" href="/register">Register</a>
-          <a class="tab" href="/login">Login</a>
-          <span class="tabSlider"></span>
-      </div>
-  </section>
+<!--  <section class="header">-->
+<!--      <h1 id="headerLogo"><a href="/" id="headerLogo">MEAL PLANNER</a></h1>-->
+<!--      <h3>something interesting goes here...and maybe a logo</h3>-->
+<!--      <div class="navbar">-->
+<!--          <a class="tab" href="/about">About</a>-->
+<!--          <a class="tab" href="/meals">Meals</a>-->
+<!--          <a class="tab" href="/calendar">Calendar</a>-->
+<!--          <a class="tab" href="/register">Register</a>-->
+<!--          <a class="tab" href="/login">Login</a>-->
+<!--          <span class="tabSlider"></span>-->
+<!--      </div>-->
+<!--  </section>-->
+  <div class="bs-component">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="/">Meal Planner</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/about">Features<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/meals">Meals</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/calendar">Calendar</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/register">Register</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/login">Login</a>
+                  </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                  <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+          </div>
+      </nav>
+  </div>
     {{{body}}}
 
 <!--  footer -->
-  <div class="footer-dark">
+  <div class="footer bg-primary">
       <footer>
           <div class="container">
               <div class="row">
                   <div class="col-sm-6 col-md-3 item">
-                      <h3>About</h3>
+                      <h3>Features</h3>
                       <ul>
                           <li><a href="#">Meals</a></li>
                           <li><a href="#">Calendar</a></li>
-                          <li><a href="#">Other Link</a></li>
                       </ul>
                   </div>
                   <div class="col-sm-6 col-md-3 item">
-                      <h3>Heading</h3>
+                      <h3>About</h3>
                       <ul>
                           <li><a href="#">About Us</a></li>
-                          <li><a href="#">Another Link</a></li>
-                          <li><a href="#">Feedback</a></li>
+                          <li><a href="#">Contact</a></li>
                       </ul>
                   </div>
                   <div class="col-md-6 item text">
-                      <h3>Some Heading</h3>
+                      <h3>Meal Planner</h3>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   </div>
-                  <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-linkedin"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                  <div class="item social col"><a href="#">
+                      <img src="/images/icons/facebook-white.png"></a><a href="#">
+                      <img src="/images/icons/twitter-white.png"></a><a href="#">
+                      <img src="/images/icons/linkedin-white.png"></a><a href="#">
+                      <img src="/images/icons/instagram-white.png"></a><a href="#">
+                  </a></div>
               </div>
               <p class="copyright">Linda Ryan &copy; 2020</p>
           </div>
       </footer>
   </div>
-  <button id="toTopBtn"><svg width="24" height="24" viewBox="0 0 24 24">
-      <path d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z"></path>
-  </svg></button>
+      <a href="#"><img src="/images/icons/toTop.png" id="toTopBtn"></a>
   </body>
 <script src='/javascripts/scripts.js'></script>
 </html>

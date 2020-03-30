@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
 
 /* GET about page. */
 router.get('/about', (req, res, next) => {
-  res.render('about', { title: 'Meal Planner' });
+  res.render('about');
 })
 
 // GET: calendar page

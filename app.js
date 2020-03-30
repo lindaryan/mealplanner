@@ -10,8 +10,9 @@ var mongoose = require('mongoose')
 
 var usersController = require('./controllers/users');
 
-// add reference to meals controller
+// add reference to meals and mealTypes controllers
 var mealsController = require('./controllers/meals')
+var mealTypesController = require('./controllers/mealtypes')
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/', indexController);
 
 // map any urls starting with /meals to be handled by the meals controller
 app.use('/meals', mealsController)
+app.use('/mealTypes', mealTypesController)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

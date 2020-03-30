@@ -1,0 +1,15 @@
+<h1>Your Meals</h1>
+<a href="/meals/add">Add a New Meal</a>
+<table class="table table-striped table-hover">
+    <thead>
+        <th>Name</th>
+        <th>Type</th>
+    </thead>
+<!--    loop thru meals to display each -->
+    {{#each meals}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.mealType}}</td>
+        </tr>
+    {{/each}}
+</table>

@@ -1,31 +1,25 @@
 <div class="row">
     <div class="col-lg-12">
-        <div class="page-header">
-        </div>
+        <div class="page-header"></div>
         <div class="bs-component">
-
             <section class="et-slide" id="about">
-
-            <h1>Food Details</h1>
-
-<form method="post">
-    <fieldset>
-        <label for="name" >Meal:  </label>
-        <input name="name" id="name" required value="{{meal.name}}" />
-    </fieldset>
-    <fieldset>
-        <label for="mealType" >Type:  </label>
-        <input name="mealType" id="mealType" required value="{{meal.mealType}}" />
-<!--        <select name="mealType" id="mealType">-->
-<!--            {{#each mealTypes}}-->
-<!--                <option>{{this.name}}</option>-->
-<!--            {{/each}}-->
-<!--        </select>-->
-
-    </fieldset>
-    <button class="btn btn-primary offset-sm-2">Save</button>
-</form>
-
+                <h1>Food Details</h1>
+                <form method="post">
+                    <fieldset>
+                        <label for="name" >Meal:  </label>
+                        <input name="name" id="name" required value="{{meal.name}}" />
+                    </fieldset>
+                    <fieldset>
+                        <label for="mealType" >Type:  </label>
+                        <input name="mealType" id="mealType" required value="{{meal.mealType}}" />
+                        <!-- <select name="mealType" id="mealType">-->
+                        <!-- {{#each mealTypes}}-->
+                        <!-- <option>{{this.name}}</option>-->
+                        <!-- {{/each}}-->
+                        <!-- </select>-->
+                    </fieldset>
+                    <button class="btn btn-primary offset-sm-2">Save</button>
+                </form>
             </section>
         </div>
     </div>

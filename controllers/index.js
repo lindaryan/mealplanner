@@ -15,25 +15,20 @@ router.get('/about', (req, res, next) => {
   res.render('about');
 })
 
-// GET: calendar page
-router.get('/calendar', (req, res, next) => {
-  res.render('calendar')
-})
-
-// GET: /register => load register form
+// GET: register page
 router.get('/register', (req, res, next) => {
   res.render('register')
 })
 
-// POST: /register => use passport to create a new user
+// POST: register page using passport to create new user
 router.post('/register', (req, res, next) => {
-  // use the User model & passport to register.  Send password separately so passport can hash it
+  // using User model & passport to register, sending password separately using passport to hash it
   User.register(new User({ username: req.body.username }), req.body.password, (err, newUser) => {
     if (err) { // reload register page and pass error details to it for display
       console.log(err)
       res.render('register', { message: err} )
     }
-    else { // register was successful.  log new user in and load main meals page
+    else { // register was successful so log user in and load meals index
       req.login(newUser, (err) => {
         res.redirect('/meals')
         user: req.user
@@ -42,11 +37,11 @@ router.post('/register', (req, res, next) => {
   })
 })
 
-// GET: /login => load login form
+// GET: login page
 router.get('/login', (req, res, next) => {
   res.render('login')
-  let messages = req.session.messages || [] //store any session messages in a local variable
-  req.session.messges = [] //
+  let messages = req.session.messages || [] //store session messages in local variable
+  req.session.messges = []
 
   //pass any messages to login view
   res.render('login',  {
@@ -54,32 +49,20 @@ router.get('/login', (req, res, next) => {
   })
 })
 
-// POST: /login => authenticate user
+// POST: /login (authenticate user)
 router.post('/login', passport.authenticate('local', { //strategy =  one param - local db? google?
   successRedirect: '/meals',
   failureRedirect: '/login',
   failureMessage: 'Invalid Login'
 }))
 
-// GET: /logout => sign user out
+// GET: /logout (log out user)
 router.get('/logout', (req, res, next) => {
-  req.session.messages = [] // clear any msgs in session variable
-  // sign out & redirect to login
+  req.session.messages = [] // clear msgs in session var
+  // sign out & redir back to login page
   req.logout()
   res.redirect('/login')
   user: req.user
-})
-
-// GET: /google => invoke Google Sign-In
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile']
-}), (req, res, next) => {})
-
-// GET: /google/callback => process successful google sign-in request
-router.get('/google/callback', passport.authenticate('google', {
-  failureRedirect: '/login'
-}), (req, res, next) => {
-  res.redirect('/meals')
 })
 
 module.exports = router

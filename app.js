@@ -11,9 +11,8 @@ var session = require('express-session')
 // add mongoose for db connection
 var mongoose = require('mongoose')
 
+// add ref to controllers
 var usersController = require('./controllers/users');
-
-// add reference to meals and mealTypes controllers
 var mealsController = require('./controllers/meals')
 var mealTypesController = require('./controllers/mealTypes')
 
@@ -43,7 +42,6 @@ mongoose.connect(globals.db, {
   console.log('Connection to MongoDB failed')
 })
 
-
 // passport auth config
 // 1. set app to manage sessions
 app.use(session({
@@ -60,12 +58,6 @@ app.use(passport.session())
 var User = require('./models/user')
 passport.use(User.createStrategy())
 
-// 4. set up passport to read/write user data to/from the session object so as user moves thru site can constantly id them
-//now modified for fb
-// passport.deserializeUser(User.deserializeUser())
-// passport.serializeUser(User.serializeUser())
-
-
 // google auth
 var googleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -75,25 +67,22 @@ passport.use(new googleStrategy({
         callbackURL: globals.ids.google.callbackURL
     },
     (token, tokenSecret, profile, done) => {
-        // logic to evaluate what we got back from google
+        // evaluate the info that comes back from google
         User.findOne({oauthID: profile.id}, (err, user) => {
             if (err) {
                 console.log(err)
             }
-
-            // no error and we already have this user in mongodb users collection so pass the user on to the next method
             if (!err && user !== null) {
                 done(null, user)
             }
             else {
-                // user does not exist so create a new user from this google profile
+                // if user doesn't exist create new user from google acct
                 user = new User({
                     username: profile.displayName,
                     oauthID: profile.id,
                     oauthProvider: 'Google',
                     created: Date.now()
                 })
-
                 user.save((err) => {
                     if (err) {
                         console.log(err)
@@ -107,49 +96,7 @@ passport.use(new googleStrategy({
     }
 ))
 
-
-// // facebook login w/passport
-// var facebookStrategy = require('passport-facebook').Strategy;
-//
-// passport.use(new facebookStrategy({
-//         clientID: globals.ids.facebook.clientID,
-//         clientSecret: globals.ids.facebook.clientSecret,
-//         callbackURL: globals.ids.facebook.callbackURL
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//         // check if this user already exists in our mongodb
-//         User.findOne({oauthID: profile.id}, (err, user) => {
-//         // User.findOne({oauth: profile.id}, (err, user) => {
-//             if (err) {
-//                 console.log(err)
-//             }
-//
-//             // user with this fb profile already exists in our db, so just return their user account so they can access things
-//             if (!err && user != null) {
-//                 done(null, user)
-//             }
-//             else {
-//                 // this is a new fb user for our site
-//                 user = new User({
-//                     oauthID: profile.id,
-//                     username: profile.displayName,
-//                     oauthProvider: 'Facebook',
-//                     created: Date.now()
-//                 })
-//
-//                 user.save((err) => {
-//                     if (err) {
-//                         console.log(err)
-//                     }
-//                     else {
-//                         done(null, user)
-//                     }
-//                 })
-//             }
-//         })
-//     }))
-
-// write the user id to the session object for storage
+// use passport to read/write user data and store to session obj
 passport.serializeUser((user, done) => {
     done(null, user._id)
 })
@@ -165,10 +112,6 @@ passport.deserializeUser((id, done) => {
     })
 })
 
-
-
-
-
 app.use('/users', usersController);
 
 var indexController = require('./controllers/index');
@@ -178,37 +121,28 @@ app.use('/', indexController);
 app.use('/meals', mealsController)
 app.use('/mealTypes', mealTypesController)
 
-
-// helper method to select the proper country in the meals/edit view
+// helper method to select the proper mealtype in the meals/edit view
 var hbs = require('hbs')
 
 hbs.registerHelper('createOption', (currentValue, selectedValue) => {
-    // if the 2 values match, add the text ' selected', otherwise add an empty string
-    //var selectedProperty = currentValue === selectedValue ? ' selected' : ''
     var selectedProperty = ''
     if (currentValue === selectedValue) {
         selectedProperty = ' selected'
     }
-
     return new hbs.SafeString('<option' + selectedProperty + '>' + currentValue + '</option>')
 })
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler in development only (set locals)
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error'); // render error page
 });
 
 module.exports = app;

@@ -2,7 +2,7 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
-// include mongoose & Meal model references for crud
+// for crud include mongoose & Meal model refs
 var mongoose = require('mongoose')
 var Meal = require('../models/meal')
 var MealType = require('../models/mealType')
@@ -13,31 +13,31 @@ function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
     }
-    //redirect anonymous to login
+    //redirect anon to login page
     res.redirect('/login')
 }
 
-// GET main meal page
+// GET main meal page - public (read-only)
 router.get('/', (req, res, next) => {
-    // use the Meal model & mongoose to select all meals from MongoDB
+    // select meals from db using meal model
     Meal.find((err, meals) => {
         if (err) {
             console.log(err)
             res.send(err)
         }
         else {
-            // load the main meals page
+            // load main meals page
             res.render('meals/index', {
                 meals: meals,
-                user: req.user //have linked to passport, now passing this user data
+                user: req.user //pass the user data
             })
         }
     })
 })
 
-// GET /meals/add for logged in users
+// GET /meals/add for logged in users only
 router.get('/add', isAuthenticated, (req, res, next) => {
-    // load the add view and get list of meal types for dropdown
+    // load /meals/add view using ist of mealTypes to populate dropdown
     MealType.find((err, mealTypes) => {
         if (err) {
             console.log(err)
@@ -51,9 +51,9 @@ router.get('/add', isAuthenticated, (req, res, next) => {
     }).sort({name:1})
 })
 
-// POST /meals/add process form submission
+// POST /meals/add form submission
 router.post('/add', isAuthenticated, (req, res, next) => {
-    // create a new item in the meals db collection
+    // create new meal item in the meals db collection
     Meal.create({
         name: req.body.name,
         mealType: req.body.mealType
@@ -63,7 +63,7 @@ router.post('/add', isAuthenticated, (req, res, next) => {
             res.send(err)
         }
         else {
-            // load updated meals index
+            // load updated meals page
             res.redirect('/meals')
             user: req.user
 
@@ -71,9 +71,9 @@ router.post('/add', isAuthenticated, (req, res, next) => {
     })
 })
 
-// GET /meals/delete/abc123 - :_id means this method expects a parameter called "_id"
+// GET /meals/delete/:_id where :_id references the selected document
 router.get('/delete/:_id', isAuthenticated, (req, res, next) => {
-    // use the mongoose Model to delete the selected document
+    // use mongoose Model to delete the selected document
     Meal.remove({ _id: req.params._id }, (err) => {
         if (err) {
             console.log(err)
@@ -85,7 +85,7 @@ router.get('/delete/:_id', isAuthenticated, (req, res, next) => {
     })
 })
 
-// GET /meals/edit/:_id -> display populated edit form
+// GET /meals/edit/:_id - display edit form, populated by selected id
 router.get('/edit/:_id', isAuthenticated, (req, res, next) => {
     Meal.findById(req.params._id, (err, meal) => {
         if (err) {
@@ -101,7 +101,7 @@ router.get('/edit/:_id', isAuthenticated, (req, res, next) => {
     })
 })
 
-// POST /meals/edit/:_id -> updated selected meal document
+// POST /meals/edit/:_id - update meal document by selected id
 router.post('/edit/:_id', isAuthenticated, (req, res, next) => {
     Meal.findOneAndUpdate({ _id: req.params._id },
         {
@@ -117,8 +117,6 @@ router.post('/edit/:_id', isAuthenticated, (req, res, next) => {
             }
         })
 })
-
-
 
 // make the controller public
 module.exports = router

@@ -11,8 +11,8 @@ module.exports = {
         'facebook': {
             'clientID': '238544547519529',
             'clientSecret': 'fda4d9cbb8c76192c433adda4df04448',
-            'callbackURL': 'http://localhost:3000/facebook/callback'
-            // https://mealplanner-lindaryan.herokuapp.com/facebook/callback
+            // 'callbackURL': 'http://localhost:3000/facebook/callback'
+            'callbackURL': 'https://mealplanner-lindaryan.herokuapp.com/facebook/callback'
         }
     }
 }

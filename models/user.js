@@ -4,7 +4,10 @@ var plm = require('passport-local-mongoose') // used to extend this model's func
 // create basic user schema
 var userSchema = new mongoose.Schema({
     username: String,
-    // password: String
+    password: String,
+    oauthID: String,
+    oauthProvider: String,
+    created: Date
 })
 
 // extend this model so it's no longer a regular model but used by passport for user management

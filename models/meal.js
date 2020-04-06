@@ -6,10 +6,10 @@ var mealSchema = new mongoose.Schema({
     name: {
         type: String,
         required: 'Name is required'
-        // },
-        // mealType:{
-        //     type: String,
-        //     required: 'Meal type is required'
+        },
+    mealType:{
+        type: String,
+        required: 'Meal type is required'
     }
 })
 

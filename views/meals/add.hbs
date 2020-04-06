@@ -8,8 +8,13 @@
     <fieldset>
         <label for="mealType" class="col-sm-2">Type:</label>
         <!--            change to dropdown-->
-        <input name="mealType" id="mealType">
-        </input>
+<!--        <input name="mealType" id="mealType">-->
+        <select name="mealType" id="mealType">
+            {{#each mealTypes}}
+                <option>{{this.name}}</option>
+            {{/each}}
+        </select>
     </fieldset>
     <button class="btn btn-primary btn-lg offset-sm-2" role="button">Save</button>
 </form>
+

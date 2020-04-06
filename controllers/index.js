@@ -2,13 +2,12 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport')
 var mongoose = require('mongoose')
-var Meal = require('../models/meal')
-var MealType = require('../models/mealType')
 var User = require('../models/user')
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Meal Planner' });
+  user: req.user
 })
 
 /* GET about page. */
@@ -20,8 +19,6 @@ router.get('/about', (req, res, next) => {
 router.get('/calendar', (req, res, next) => {
   res.render('calendar')
 })
-
-
 
 // GET: /register => load register form
 router.get('/register', (req, res, next) => {
@@ -40,12 +37,10 @@ router.post('/register', (req, res, next) => {
       req.login(newUser, (err) => {
         res.redirect('/meals')
         user: req.user
-
       })
     }
   })
 })
-
 
 // GET: /login => load login form
 router.get('/login', (req, res, next) => {
@@ -59,7 +54,6 @@ router.get('/login', (req, res, next) => {
   })
 })
 
-
 // POST: /login => authenticate user
 router.post('/login', passport.authenticate('local', { //strategy =  one param - local db? google?
   successRedirect: '/meals',
@@ -70,37 +64,22 @@ router.post('/login', passport.authenticate('local', { //strategy =  one param -
 // GET: /logout => sign user out
 router.get('/logout', (req, res, next) => {
   req.session.messages = [] // clear any msgs in session variable
-
   // sign out & redirect to login
   req.logout()
   res.redirect('/login')
   user: req.user
-
 })
-
-
-
-// GET: /logout => sign user out
-router.get('/logout', (req, res, next) => {
-  req.session.messages = [] // clear any msgs in session variable
-
-  // sign out & redirect to login
-  req.logout()
-  res.redirect('/login')
-})
-
 
 // GET: /facebook/callback => process successful facebook sign-in request
 router.get('/facebook/callback', passport.authenticate('facebook') ,
     (req, res, next) => {}
 )
 
-// GET /facebook/callabck => process successful facebook login
+// GET /facebook/callback => process successful facebook login
 router.get('/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: '/login'
 }), (req, res, next) => {
   res.redirect('/meals')
 })
-
 
 module.exports = router

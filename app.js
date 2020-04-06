@@ -66,6 +66,47 @@ passport.use(User.createStrategy())
 // passport.serializeUser(User.serializeUser())
 
 
+// google auth
+var googleStrategy = require('passport-google-oauth20').Strategy;
+
+passport.use(new googleStrategy({
+        clientID: globals.ids.google.clientID,
+        clientSecret: globals.ids.google.clientSecret,
+        callbackURL: globals.ids.google.callbackURL
+    },
+    (token, tokenSecret, profile, done) => {
+        // logic to evaluate what we got back from google
+        User.findOne({oauthID: profile.id}, (err, user) => {
+            if (err) {
+                console.log(err)
+            }
+
+            // no error and we already have this user in mongodb users collection so pass the user on to the next method
+            if (!err && user !== null) {
+                done(null, user)
+            }
+            else {
+                // user does not exist so create a new user from this google profile
+                user = new User({
+                    username: profile.displayName,
+                    oauthID: profile.id,
+                    oauthProvider: 'Google',
+                    created: Date.now()
+                })
+
+                user.save((err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+                        done(null, user)
+                    }
+                })
+            }
+        })
+    }
+))
+
 
 // facebook login w/passport
 var facebookStrategy = require('passport-facebook').Strategy;
@@ -136,6 +177,23 @@ app.use('/', indexController);
 // map any urls starting with /meals to be handled by the meals controller
 app.use('/meals', mealsController)
 app.use('/mealTypes', mealTypesController)
+
+
+// helper method to select the proper country in the foods/edit view
+var hbs = require('hbs')
+
+hbs.registerHelper('createOption', (currentValue, selectedValue) => {
+    // if the 2 values match, add the text ' selected', otherwise add an empty string
+    //var selectedProperty = currentValue === selectedValue ? ' selected' : ''
+    var selectedProperty = ''
+    if (currentValue === selectedValue) {
+        selectedProperty = ' selected'
+    }
+
+    return new hbs.SafeString('<option' + selectedProperty + '>' + currentValue + '</option>')
+})
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

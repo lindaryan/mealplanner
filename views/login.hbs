@@ -21,7 +21,7 @@
 <!--</div>-->
 <h1>Login</h1>
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=238544547519529&autoLogAppEvents=1"></script>
+<!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=238544547519529&autoLogAppEvents=1"></script>-->
 {{#if (messages)}}
     <div class="alert alert-danger">
         Invalid Login
@@ -47,7 +47,9 @@
         <button class="btn btn-primary offset-2">Login</button>
     </fieldset>
     <fieldset>
-        <div class="fb-login-button offset-2" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true"></div>
+<!--        <div class="fb-login-button offset-2" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true"></div>-->
+        <a href="/google"><img src="/images/google.png" alt="Google Sign-in"></a>
+<!--                <a href="/facebook"><img src="/images/facebook.png" alt="Facebook Sign-in"></a>-->
         <hr />
         Need an account?  <a href="/register" title="Register">Register</a>
     </fieldset>

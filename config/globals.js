@@ -3,9 +3,11 @@ module.exports = {
     'db': 'mongodb+srv://comp2106:Georgian2020!@cluster0-vh0e5.mongodb.net/mealplanner?retryWrites=true&w=majority',
     'ids': {
         'google': {
-            'clientID': '305161992946-sptgf282fhit65qtvp1k2n0lir01se3m.apps.googleusercontent.com',
-            'clientSecret': 'CjqRgUjrT8QbZp5BsTwGyt10',
+            // 'clientID': '489844810910-bmprquroavtn9jgcoqom5ba49shddpij.apps.googleusercontent.com',
+            // 'clientSecret': 'CjqRgUjrT8QbZp5BsTwGyt10',
             // 'callbackURL': 'http://localhost:3000/google/callback'
+            'clientID': '305161992946-sptgf282fhit65qtvp1k2n0lir01se3m.apps.googleusercontent.com',
+            'clientSecret': 'ZcYqB-idIgZWR0w45490ul9f',
             'callbackURL': 'https://comp2106-globalfood.herokuapp.com/google/callback'
         },
         'facebook': {

@@ -108,46 +108,46 @@ passport.use(new googleStrategy({
 ))
 
 
-// facebook login w/passport
-var facebookStrategy = require('passport-facebook').Strategy;
-
-passport.use(new facebookStrategy({
-        clientID: globals.ids.facebook.clientID,
-        clientSecret: globals.ids.facebook.clientSecret,
-        callbackURL: globals.ids.facebook.callbackURL
-    },
-    (accessToken, refreshToken, profile, done) => {
-        // check if this user already exists in our mongodb
-        User.findOne({oauthID: profile.id}, (err, user) => {
-        // User.findOne({oauth: profile.id}, (err, user) => {
-            if (err) {
-                console.log(err)
-            }
-
-            // user with this fb profile already exists in our db, so just return their user account so they can access things
-            if (!err && user != null) {
-                done(null, user)
-            }
-            else {
-                // this is a new fb user for our site
-                user = new User({
-                    oauthID: profile.id,
-                    username: profile.displayName,
-                    oauthProvider: 'Facebook',
-                    created: Date.now()
-                })
-
-                user.save((err) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                    else {
-                        done(null, user)
-                    }
-                })
-            }
-        })
-    }))
+// // facebook login w/passport
+// var facebookStrategy = require('passport-facebook').Strategy;
+//
+// passport.use(new facebookStrategy({
+//         clientID: globals.ids.facebook.clientID,
+//         clientSecret: globals.ids.facebook.clientSecret,
+//         callbackURL: globals.ids.facebook.callbackURL
+//     },
+//     (accessToken, refreshToken, profile, done) => {
+//         // check if this user already exists in our mongodb
+//         User.findOne({oauthID: profile.id}, (err, user) => {
+//         // User.findOne({oauth: profile.id}, (err, user) => {
+//             if (err) {
+//                 console.log(err)
+//             }
+//
+//             // user with this fb profile already exists in our db, so just return their user account so they can access things
+//             if (!err && user != null) {
+//                 done(null, user)
+//             }
+//             else {
+//                 // this is a new fb user for our site
+//                 user = new User({
+//                     oauthID: profile.id,
+//                     username: profile.displayName,
+//                     oauthProvider: 'Facebook',
+//                     created: Date.now()
+//                 })
+//
+//                 user.save((err) => {
+//                     if (err) {
+//                         console.log(err)
+//                     }
+//                     else {
+//                         done(null, user)
+//                     }
+//                 })
+//             }
+//         })
+//     }))
 
 // write the user id to the session object for storage
 passport.serializeUser((user, done) => {
@@ -179,7 +179,7 @@ app.use('/meals', mealsController)
 app.use('/mealTypes', mealTypesController)
 
 
-// helper method to select the proper country in the foods/edit view
+// helper method to select the proper country in the meals/edit view
 var hbs = require('hbs')
 
 hbs.registerHelper('createOption', (currentValue, selectedValue) => {

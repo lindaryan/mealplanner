@@ -10,13 +10,6 @@ router.get('/', (req, res, next) => {
   user: req.user
 })
 
-
-router.get('/googlefb9a6eaaf9c318bf', (req, res, next) => {
-  res.render('googlefb9a6eaaf9c318bf')
-  // user.req.user
-})
-
-
 /* GET about page. */
 router.get('/about', (req, res, next) => {
   res.render('about');
@@ -82,33 +75,8 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile']
 }), (req, res, next) => {})
 
-
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Meal Planner' });
-  user: req.user
-})
-
-
 // GET: /google/callback => process successful google sign-in request
 router.get('/google/callback', passport.authenticate('google', {
-  failureRedirect: '/login'
-}), (req, res, next) => {
-  res.redirect('/meals')
-})
-
-// GET: /google => invoke Google Sign-In
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile']
-}), (req, res, next) => {})
-
-
-// GET: /facebook/callback => process successful facebook sign-in request
-router.get('/facebook/callback', passport.authenticate('facebook') ,
-    (req, res, next) => {}
-)
-
-// GET /facebook/callback => process successful facebook login
-router.get('/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: '/login'
 }), (req, res, next) => {
   res.redirect('/meals')

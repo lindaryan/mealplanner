@@ -1,15 +1,32 @@
 <h1>Your Meals</h1>
-<a href="/meals/add">Add a New Meal</a>
+{{#if user}}
+    <a href="/meals/add">Add a New Meal</a>
+{{/if}}
 <table class="table table-striped table-hover">
     <thead>
         <th>Name</th>
         <th>Type</th>
+    {{#if user}}
+        <th> </th>
+    {{/if}}
     </thead>
 <!--    loop thru meals to display each -->
     {{#each meals}}
         <tr>
-            <td>{{this.name}}</td>
+            <td>
+                <!-- we are inside the foods loop so we need to prefix the top-level "user" variable with ../ -->
+                {{#if ../user }}
+                    <a href="/meals/edit/{{this._id}}">{{this.name}}</a>
+                {{else}}
+                    {{this.name}}
+                {{/if}}
+            </td>
             <td>{{this.mealType}}</td>
+            {{#if ../user}}
+                <td>
+                    <a href="/meals/delete/{{this._id}}" class="text-danger" onclick="return confirmDelete();">Delete</a>
+                </td>
+            {{/if}}
         </tr>
     {{/each}}
 </table>

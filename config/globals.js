@@ -5,8 +5,8 @@ module.exports = {
         'google': {
             'clientID': '305161992946-sptgf282fhit65qtvp1k2n0lir01se3m.apps.googleusercontent.com',
             'clientSecret': 'CjqRgUjrT8QbZp5BsTwGyt10',
-            'callbackURL': 'http://localhost:3000/google/callback'
-            // https://comp2106-globalfood.herokuapp.com/google/callback
+            // 'callbackURL': 'http://localhost:3000/google/callback'
+            'callbackURL': 'https://comp2106-globalfood.herokuapp.com/google/callback'
         },
         'facebook': {
             'clientID': '238544547519529',

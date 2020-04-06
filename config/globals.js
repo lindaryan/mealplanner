@@ -8,7 +8,7 @@ module.exports = {
             // 'callbackURL': 'http://localhost:3000/google/callback'
             'clientID': '305161992946-sptgf282fhit65qtvp1k2n0lir01se3m.apps.googleusercontent.com',
             'clientSecret': 'ZcYqB-idIgZWR0w45490ul9f',
-            'callbackURL': 'https://comp2106-globalfood.herokuapp.com/google/callback'
+            'callbackURL': 'https://mealplanner-lindaryan.herokuapp.com/google/callback'
         },
         'facebook': {
             'clientID': '238544547519529',

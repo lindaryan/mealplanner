@@ -4,18 +4,16 @@
     <title>{{title}}</title>
       <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
       <link rel='stylesheet' href='/stylesheets/style.css'>
-<!--      google verification-->
+      <!-- google verification -->
       <meta name="google-site-verification" content="0gyb5DfE2g90p3oyJwPABk63K_xukW9CuQBTx_VyCoA" />
-
   </head>
   <body>
   <div class="bs-component">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top scrolling-navbar">
           <a class="navbar-brand" href="/">Meal Planner</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
-
           <div class="collapse navbar-collapse" id="navbarColor01">
               <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
@@ -27,9 +25,9 @@
               </ul>
               <ul class="navbar-nav ml-auto">
                   {{#if user}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{user.username}}</a>
-                    </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Hi, {{user.username}}!</a>
+                      </li>
                       <li class="nav-item">
                           <a class="nav-link" href="/logout">Logout</a>
                       </li>
@@ -42,16 +40,11 @@
                       </li>
                   {{/if}}
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                  <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-              </form>
           </div>
       </nav>
   </div>
     {{{body}}}
-
-<!--  footer -->
+  <!--  footer -->
   <div class="footer bg-primary">
       <footer>
           <div class="container">
@@ -60,7 +53,7 @@
                       <h3>Features</h3>
                       <ul>
                           <li><a href="#">Meals</a></li>
-                          <li><a href="#">Calendar</a></li>
+                          <li><a href="#">Some link</a></li>
                       </ul>
                   </div>
                   <div class="col-sm-6 col-md-3 item">
@@ -72,7 +65,7 @@
                   </div>
                   <div class="col-md-6 item text">
                       <h3>Meal Planner</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                      <p>Let's make cooking stress-free, simplified, smarter.</br>Start saving time with Meal Planner today.</p>
                   </div>
                   <div class="item social col"><a href="#">
                       <img src="/images/icons/facebook-white.png"></a><a href="#">
@@ -81,11 +74,14 @@
                       <img src="/images/icons/instagram-white.png"></a><a href="#">
                   </a></div>
               </div>
-              <p class="copyright">Linda Ryan &copy; 2020</p>
+              <p class="copyright"><a href="https://github.com/lindaryan/mealplanner">Linda Ryan &copy; 2020</a></p>
           </div>
       </footer>
-  </div>
+  </div> <!-- end footer -->
       <a href="#"><img src="/images/icons/toTop.png" id="toTopBtn"></a>
   </body>
-<script src='/javascripts/scripts.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src='/javascripts/scripts.js'></script>
 </html>

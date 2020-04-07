@@ -10,6 +10,10 @@ var mealSchema = new mongoose.Schema({
     mealType:{
         type: String,
         required: 'Meal type is required'
+    // },
+    // image: {
+    //     type: String,
+    //     required: 'Image is required'
     }
 })
 

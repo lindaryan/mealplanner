@@ -4,20 +4,36 @@
         <div class="bs-component">
             <section class="et-slide" id="about">
                 <h1>Add a Meal</h1>
-                <form method="post">
+<!--                <form method="post">-->
+<!--                    <fieldset>-->
+<!--                        <label for="name">Name:  </label>-->
+<!--                        <input name="name" id="name" required>-->
+<!--                    </fieldset>-->
+<!--                    <fieldset>-->
+<!--                        <label for="mealType">Type:  </label>-->
+<!--                        <select name="mealType" id="mealType">-->
+<!--                            {{#each mealTypes}}-->
+<!--                                <option>{{this.name}}</option>-->
+<!--                            {{/each}}-->
+<!--                        </select>-->
+<!--                    </fieldset>-->
+<!--                    <button class="btn btn-primary btn-lg offset-sm-2" role="button">Save</button>-->
+<!--                </form>-->
+                <form action='/api/images' method="post" enctype="multipart/form-data">
                     <fieldset>
                         <label for="name">Name:  </label>
                         <input name="name" id="name" required>
                     </fieldset>
                     <fieldset>
                         <label for="mealType">Type:  </label>
-                        <!-- change to dropdown-->
-                        <!-- <input name="mealType" id="mealType">-->
                         <select name="mealType" id="mealType">
                             {{#each mealTypes}}
                                 <option>{{this.name}}</option>
                             {{/each}}
                         </select>
+                    </fieldset>
+                    <fieldset>
+                        <input type='file' name='image' />
                     </fieldset>
                     <button class="btn btn-primary btn-lg offset-sm-2" role="button">Save</button>
                 </form>

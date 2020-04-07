@@ -96,6 +96,22 @@ passport.use(new googleStrategy({
     }
 ))
 
+
+//github
+var GitHubStrategy = require("passport-github2").Strategy
+
+passport.use(new GitHubStrategy({
+            clientID: globals.ids.github.clientID,
+            clientSecret: globals.ids.github.clientSecret,
+            callbackURL: globals.ids.github.callbackURL
+        },
+    function(accessToken, refreshToken, profile, done) {
+        User.findOrCreate({ githubId: profile.id }, function (err, user) {
+            return done(err, user);
+        });
+    }
+));
+
 // use passport to read/write user data and store to session obj
 passport.serializeUser((user, done) => {
     done(null, user._id)

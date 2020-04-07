@@ -18,3 +18,4 @@ function comparePasswords() {
         return true
     }
 }
+

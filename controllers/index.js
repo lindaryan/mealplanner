@@ -78,4 +78,18 @@ router.get('/google/callback', passport.authenticate('google', {
   res.redirect('/meals')
 })
 
+// github sign in
+// GET: /github
+router.get('/github', passport.authenticate('github', {
+  scope: ['user:email']
+}), (req, res, next) => {})
+  // scope: [ 'user:email' ] }));
+
+// GET: /github/callback - successful
+router.get('/github/callback', passport.authenticate('github', {
+  failureRedirect: '/login'
+}), (req, res, next) => {
+  res.redirect('/meals')
+})
+
 module.exports = router

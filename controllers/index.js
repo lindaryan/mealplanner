@@ -4,6 +4,7 @@ var passport = require('passport')
 var mongoose = require('mongoose')
 var User = require('../models/user')
 
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Meal Planner' });
@@ -83,7 +84,7 @@ router.get('/google/callback', passport.authenticate('google', {
 router.get('/github', passport.authenticate('github', {
   scope: ['user:email']
 }), (req, res, next) => {})
-  // scope: [ 'user:email' ] }));
+
 
 // GET: /github/callback - successful
 router.get('/github/callback', passport.authenticate('github', {

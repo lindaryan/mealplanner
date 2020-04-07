@@ -13,7 +13,7 @@ var mealSchema = new mongoose.Schema({
     // },
     // image: {
     //     type: String,
-    //     required: 'Image is required'
+    //     required: true
     }
 })
 
